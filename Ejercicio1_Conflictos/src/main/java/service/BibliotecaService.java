@@ -54,7 +54,7 @@ public class BibliotecaService {
         }
 
         // Realizar la reserva
-        libro.setDisponible(false);
+        libro.setDisponible(0);
         reservas.add(new Reserva(usuario, libro));
 
         System.out.println("Reserva realizada correctamente.");
@@ -109,7 +109,7 @@ public class BibliotecaService {
         if (libro == null || !libro.isDisponible()) {
             return false;
         }
-        libro.setDisponible(false);
+        libro.setDisponible(0);
         reservas.add(new Reserva(usuario, libro));
         return true;
     }
@@ -117,7 +117,7 @@ public class BibliotecaService {
     public boolean devolverLibro(String isbn) {
         for (Reserva r : reservas) {
             if (r.getLibro().getIsbn().equals(isbn)) {
-                r.getLibro().setDisponible(true);
+                r.getLibro().setDisponible(1);
                 reservas.remove(r);
                 return true;
             }

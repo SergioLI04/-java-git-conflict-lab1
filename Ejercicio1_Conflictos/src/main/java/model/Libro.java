@@ -24,8 +24,8 @@ public class Libro {
         return reservasActivas == 0;
     }
 
-    public void setDisponible(boolean disponible) {
-        this.disponible = disponible;
+    public void setDisponible(int reservasActivas) {
+        this.reservasActivas = reservasActivas;
     }
     public void incrementarReservas() {
         reservasActivas++;
@@ -34,6 +34,6 @@ public class Libro {
     @Override
     public String toString() {
         return titulo + " (" + isbn + ") - " +
-               (disponible ? "Disponible" : "No disponible");
+               "Reservas Activas: " + reservasActivas;
     }
 }
