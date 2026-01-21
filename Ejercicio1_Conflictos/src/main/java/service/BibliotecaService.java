@@ -77,52 +77,5 @@ public class BibliotecaService {
         return usuario != null && usuario.getNombre() != null;
     }
 
-    private List<Libro> catalogo = new ArrayList<>();
-
-    public void agregarLibro(Libro libro) {
-        catalogo.add(libro);
-    }
-
-    public boolean eliminarLibro(String isbn) {
-        return catalogo.removeIf(l -> l.getIsbn().equals(isbn));
-    }
-
-    public Libro buscarPorIsbn(String isbn) {
-        return catalogo.stream()
-                .filter(l -> l.getIsbn().equals(isbn))
-                .findFirst()
-                .orElse(null);
-    }
-
-    public List<Libro> buscarPorTitulo(String texto) {
-        return catalogo.stream()
-                .filter(l -> l.getTitulo().toLowerCase().contains(texto.toLowerCase()))
-                .collect(Collectors.toList());
-    }
-
-    public List<Libro> listarCatalogo() {
-        return catalogo;
-    }
-
-    public boolean prestarLibro(Usuario usuario, String isbn) {
-        Libro libro = buscarPorIsbn(isbn);
-        if (libro == null || !libro.isDisponible()) {
-            return false;
-        }
-        libro.setDisponible(0);
-        reservas.add(new Reserva(usuario, libro));
-        return true;
-    }
-
-    public boolean devolverLibro(String isbn) {
-        for (Reserva r : reservas) {
-            if (r.getLibro().getIsbn().equals(isbn)) {
-                r.getLibro().setDisponible(1);
-                reservas.remove(r);
-                return true;
-            }
-        }
-        return false;
-    }
 
 }
